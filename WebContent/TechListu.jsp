@@ -37,7 +37,7 @@ for(Cookie cookie : cookies){
         <h2>
         	<a href="unew">Request a TechTalk</a>
         	&nbsp;&nbsp;&nbsp;
-            <a href="ulist">Request a TechTalk</a>
+            <a href="ulist">List of TechTalk</a>
         </h2>
 	</center>
     <div align="center">
