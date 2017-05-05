@@ -46,7 +46,7 @@ for(Cookie cookie : cookies){
 		<div class="col-md-6">
 			<div class="page-header">
 				<h1>
-					Atmecs TechTonics <small>Admin Dashboard</small>
+					Atmecs TechTonics <small>Employee Dashboard</small>
 				</h1>
 				<grammarly>
 					<div class="_e725ae-textarea_btn _e725ae-not_focused">
