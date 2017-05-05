@@ -61,6 +61,7 @@ public class TechDAO {
 		
 		String sql = "SELECT * FROM techinfo";
 		
+		
 		connect();
 		
 		Statement statement = jdbcConnection.createStatement();
@@ -82,7 +83,35 @@ public class TechDAO {
 		
 		disconnect();
 		
+		    
+		
 		return listBook;
+	}
+	
+	
+	public int reqcount() throws SQLException
+	{
+	  int count=0;
+	   
+	    String sql="SELECT COUNT(*) FROM techinforeq";
+	    
+	    connect();
+	    
+	    Statement statement = jdbcConnection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+	    
+		while(resultSet.next())
+		{
+			count=resultSet.getInt("COUNT(*)");
+		}
+	    
+		resultSet.close();
+		statement.close();
+		
+		disconnect();
+	   
+	  return count;
+	  
 	}
 	
 	public boolean deleteBook(TechTalk techTalk) throws SQLException {

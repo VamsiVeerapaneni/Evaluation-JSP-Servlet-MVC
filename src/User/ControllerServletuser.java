@@ -92,7 +92,11 @@ public class ControllerServletuser extends HttpServlet {
 	private void listtechu(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<TechTalk> listBook = techDAOuser.listAllBooks();
+/*		List<RegisteredList> regh=techDAOuser.regcount();
+		int count=techDAOuser.regCount();*/
 		request.setAttribute("listBook", listBook);
+	/*	request.setAttribute("regh", regh);
+		request.setAttribute("count", count);*/
 		RequestDispatcher dispatcher = request.getRequestDispatcher("TechListu.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -100,7 +104,9 @@ public class ControllerServletuser extends HttpServlet {
 	private void listtecha(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<TechTalk> listBook = techDAOuser.listAllBooks();
+		int count=techDAO.reqcount();
 		request.setAttribute("listBook", listBook);
+		request.setAttribute("count", count);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("TechList.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -138,7 +144,9 @@ public class ControllerServletuser extends HttpServlet {
  
 	
 	private void showNewForma(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException, SQLException {
+		int count =techDAO.reqcount();
+		request.setAttribute("count", count);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("TechForm.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -146,6 +154,8 @@ public class ControllerServletuser extends HttpServlet {
 	private void showEditForma(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
+		int count =techDAO.reqcount();
+		request.setAttribute("count", count);
 		TechTalk existingBook = techDAO.getBook(id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("TechForm.jsp");
 		request.setAttribute("techTalk", existingBook);
@@ -209,7 +219,9 @@ public class ControllerServletuser extends HttpServlet {
 	private void requesttechtalk(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException 
 	{
 	      List<TechTalk> reqlist=techDAO.listreqtechtalks();
+	      int count=techDAO.reqcount();
 			request.setAttribute("reqlist", reqlist);
+			request.setAttribute("count", count);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("Reqlist.jsp");
 			dispatcher.forward(request, response);
 	      

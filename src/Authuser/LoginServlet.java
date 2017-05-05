@@ -30,9 +30,10 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
     	try 
     	{
     	int role=0;
+    	String Email = null;
         // get request parameters for userID and password
         String Username = request.getParameter("user");
-        String Password = request.getParameter("pwd");
+        String Password = request.getParameter("pass");
         check=new Check();
         ResultSet rs;
 		
@@ -42,17 +43,20 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
 			{
 			
 					role=rs.getInt("role");
-			
+			        Email=rs.getString("Email");
 			}
 			
 			
 			   if(role==1){
 		            HttpSession session = request.getSession();
 		            session.setAttribute("user", Username);
+		          
 		            //setting session to expiry in 30 mins
 		            session.setMaxInactiveInterval(1*60);
 		            Cookie userName = new Cookie("user", Username);
+		        
 		            response.addCookie(userName);
+		            
 		            //Get the encoded URL string
 		            String encodedURL = response.encodeRedirectURL("TechList.jsp");
 		            response.sendRedirect(encodedURL);
@@ -61,16 +65,19 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
 		        {
 		        	HttpSession session = request.getSession();
 		            session.setAttribute("user", Username);
+		 
 		            //setting session to expiry in 30 mins
 		            session.setMaxInactiveInterval(1*60);
 		            Cookie userName = new Cookie("user", Username);
+		        
 		            response.addCookie(userName);
+		        
 		            //Get the encoded URL string
 		            String encodedURL = response.encodeRedirectURL("TechListu.jsp");
 		            response.sendRedirect(encodedURL);
 		        }
 		        else{
-		            RequestDispatcher rd = getServletContext().getRequestDispatcher("Login.jsp");
+		            RequestDispatcher rd = getServletContext().getRequestDispatcher("/Login.jsp");
 		            PrintWriter out= response.getWriter();
 		            out.println("Either user name or password is wrong.");
 		            rd.include(request, response);

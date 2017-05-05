@@ -109,6 +109,58 @@ public class TechDAOuser {
 		return rowInserted;
 	}
 	
+	public List<RegisteredList> regcount() throws SQLException
+	{
+		List<RegisteredList> regh=new ArrayList<>();
+		
+		String sql="SELECT DISTINCT * FROM techinforeg";
+		connect();
+		
+		Statement statement = jdbcConnection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+		
+		while(resultSet.next())
+		{
+			int ID=resultSet.getInt("ID");
+			String Username=resultSet.getString("Username");
+			
+			RegisteredList obj=new RegisteredList(ID,Username);
+			regh.add(obj);
+		}
+		
+		resultSet.close();
+		statement.close();
+		
+		disconnect();
+
+		
+		return regh;
+	}
 	
+	
+	
+	public int regCount() throws SQLException
+	{
+		int count=0;
+		
+		String sql="SELCT COUNT(*) FROM techinforeg";
+		connect();
+		
+		Statement statement = jdbcConnection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+		
+		while(resultSet.next())
+		{
+			count=resultSet.getInt("COUNT(*)");
+		}
+		
+		resultSet.close();
+		statement.close();
+		
+		disconnect();
+ 
+		 return count;
+		
+	}
 	
 }
