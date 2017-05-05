@@ -1,14 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<%
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Home :: Atmecs TechTonics</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+   
+           <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/style.css" rel="stylesheet" />
+
+  </head>
+  <body>
+    
+     <%
 response.setHeader("Cache-Control","no-cache");
 response.setHeader("Cache-Control","no-store");
 response.setHeader("Pragma","no-cache");
@@ -30,24 +41,74 @@ for(Cookie cookie : cookies){
     sessionID = session.getId();
 }
 %>
-<h3>Hi <%=userName %>,</h3>
-<form action="<%=response.encodeURL("LogoutServlet") %>" method="post">
-<input type="submit" value="Logout" >
-</form>
-<center>
-		<h1>TechTalks</h1>
-        <h2>
-        	<a href="anew">Add TechTalk</a>
-        	&nbsp;&nbsp;&nbsp;
-        	<a href="alist">List Techtalk</a>
-        	&nbsp;&nbsp;&nbsp;
-        	<a href="arequest">Requested Techtalk</a>
-        </h2>
-	</center>
-    <div align="center">
-        <table border="1" cellpadding="5">
-            <caption><h2>List of Requested TechTalks</h2></caption>
-            <tr>
+   
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="page-header">
+				<h1>
+					Atmecs TechTonics <small>Admin Dashboard</small>
+				</h1>
+				<grammarly>
+					<div class="_e725ae-textarea_btn _e725ae-not_focused">
+						<div class="_e725ae-transform_wrap">
+							<div class="_e725ae-status">
+							</div>
+						</div>
+					</div>
+				</grammarly>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+					<div class="row">
+						<div class="col-md-6">
+						</div>
+						<div class="col-md-6">
+							<div class="btn-group">
+								 
+								 <form action="<%=response.encodeURL("LogoutServlet") %>" method="post">
+							<button type="submit" class="btn btn-danger">
+				                 Logout
+			               </button>
+			                 </form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="nav nav-pills">
+				<li >
+					 <a href="alist">Home</a>
+				</li>
+				<li>
+					 <a href="anew"> Add TechTalks</a>
+				</li>
+				<li class="active">
+					 <a href="arequest"> Requested TechTalks  <c:if test="${count!=0}"> <span class="badge pull-right"><c:out value="${count}"/> New</span></c:if></a>
+				</li>
+			</ul>
+			<grammarly>
+				<div class="_e725ae-textarea_btn _e725ae-not_focused">
+					<div class="_e725ae-transform_wrap">
+						<div class="_e725ae-status">
+						</div>
+					</div>
+				</div>
+			</grammarly>
+			<table class="table">
+				<thead>
+					<tr>
+					      <tr>
                 <th>ID</th>
                 <th>Date</th>
                 <th>Title</th>
@@ -55,22 +116,43 @@ for(Cookie cookie : cookies){
                 <th>Presentor</th>
                 <th>Actions</th>
             </tr>
-            <c:forEach var="techTalk" items="${reqlist}">
-                <tr>
+					</tr>
+				</thead>
+				<tbody>
+					  <c:forEach var="techTalk" items="${reqlist}">
+                <tr class="success">
                     <td><c:out value="${techTalk.id}" /></td>
                     <td><c:out value="${techTalk.date}" /></td>
                     <td><c:out value="${techTalk.title}" /></td>
                     <td><c:out value="${techTalk.description}" /></td>
                     <td><c:out value="${techTalk.presenter}" /></td>
                     <td>
-                    	<a href="aaccept?id=<c:out value='${techTalk.id}' />">Accept</a>
+                    	<a href="aaccept?id=<c:out value='${techTalk.id}' />"><button type="submit" class="btn btn-success">
+				                 Accept
+			               </button></a>
                     	&nbsp;&nbsp;&nbsp;&nbsp;
-                    	<a href="adecline?id=<c:out value='${techTalk.id}' />">Decline</a>                    	
+                    	<a href="adecline?id=<c:out value='${techTalk.id}' />"><button type="submit" class="btn btn-danger">
+				                 Decline
+			               </button></a>                    	
                     </td>
                 </tr>
             </c:forEach>
-        </table>
-    </div>	
+				</tbody>
+			</table>
+			<grammarly>
+				<div class="_e725ae-textarea_btn _e725ae-not_focused">
+					<div class="_e725ae-transform_wrap">
+						<div class="_e725ae-status">
+						</div>
+					</div>
+				</div>
+			</grammarly>
+		</div>
+	</div>
+</div>
 
-</body>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/scripts.js"></script>
+  </body>
 </html>

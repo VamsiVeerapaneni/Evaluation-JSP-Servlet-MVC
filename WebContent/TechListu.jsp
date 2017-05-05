@@ -1,12 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-<head>
-	<title>Atmecs </title>
-</head>
-<body>
-<%
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Home :: Atmecs TechTonics</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+   
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/style.css" rel="stylesheet" />
+    
+  </head>
+  <body>
+
+    <%
 response.setHeader("Cache-Control","no-cache");
 response.setHeader("Cache-Control","no-store");
 response.setHeader("Pragma","no-cache");
@@ -18,6 +31,8 @@ if(session.getAttribute("user") == null){
 }else user = (String) session.getAttribute("user");
 String userName = null;
 String sessionID = null;
+int count=0;
+int ocount=0;
 Cookie[] cookies = request.getCookies();
 if(cookies !=null){
 for(Cookie cookie : cookies){
@@ -28,44 +43,134 @@ for(Cookie cookie : cookies){
     sessionID = session.getId();
 }
 %>
-<h3>Hi <%=userName %>,</h3>
-<form action="<%=response.encodeURL("LogoutServlet") %>" method="post">
-<input type="submit" value="Logout" >
-</form>
-	<center>
-		<h1>TechTalks</h1>
-        <h2>
-        	<a href="unew">Request a TechTalk</a>
-        	&nbsp;&nbsp;&nbsp;
-            <a href="ulist">List of TechTalk</a>
-        </h2>
-	</center>
-    <div align="center">
-        <table border="1" cellpadding="5">
-            <caption><h2>List of TechTalks</h2></caption>
-            <tr>
-                <th>ID</th>
+    
+ 
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="page-header">
+				<h1>
+					Atmecs TechTonics <small>Employee Dashboard</small>
+				</h1>
+				<grammarly>
+					<div class="_e725ae-textarea_btn _e725ae-not_focused">
+						<div class="_e725ae-transform_wrap">
+							<div class="_e725ae-status">
+							</div>
+						</div>
+					</div>
+				</grammarly>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+					<div class="row">
+						<div class="col-md-6">
+						</div>
+						<div class="col-md-6">
+						   <form action="<%=response.encodeURL("LogoutServlet") %>" method="post">
+							<button type="submit" class="btn btn-danger">
+				                 Logout
+			               </button>
+			                 </form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="nav nav-pills">
+				<li class="active">
+					 <a href="ulist">Home</a>
+				</li>
+				<li>
+					 <a href="unew"> Request A TechTalks</a>
+				</li>
+			</ul>
+			<grammarly>
+				<div class="_e725ae-textarea_btn _e725ae-not_focused">
+					<div class="_e725ae-transform_wrap">
+						<div class="_e725ae-status">
+						</div>
+					</div>
+				</div>
+			</grammarly>
+			<table class="table">
+				<thead>
+					<tr>
+					 <th>ID</th>
                 <th>Date</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Presentor</th>
                 <th>Actions</th>
-            </tr>
-            <c:forEach var="techTalk" items="${listBook}">
-                <tr>
+					</tr>
+				</thead>
+				<tbody>
+		               <c:forEach var="techTalk" items="${listBook}">
+                <tr class="active">
                     <td><c:out value="${techTalk.id}" /></td>
                     <td><c:out value="${techTalk.date}" /></td>
                     <td><c:out value="${techTalk.title}" /></td>
                     <td><c:out value="${techTalk.description}" /></td>
                     <td><c:out value="${techTalk.presenter}" /></td>
                     <td>
-                    	<a href="uregister?id=<c:out value='${techTalk.id}' />&username=<%=userName %>">Register</a>
-                    	&nbsp;&nbsp;&nbsp;&nbsp;
-                    	                	
+                    
+                       <%--   <c:forEach var="regh" items="${regh}">
+                             <c:choose>
+                                  <c:when test="${regh.ID==techTalk.id}">
+                                    <c:if test="${ regh.Username.equals(<%=userName%>)}">
+                                        <button type="submit" class="btn btn-success">Already Registered</button>
+                                    </c:if>
+                                  </c:when>    
+                                  <c:otherwise>
+                                      <c:choose>
+                                          <c:when test="${ocount=<%=count>}">
+                                            <c:if test="${count==ocount}"> --%>
+                                               	<a href="uregister?id=<c:out value='${techTalk.id}' />&username=<%=userName%>"><button type="submit" class="btn btn-warning">
+				                 Register
+			               </button></a> 
+                            <%--                 </c:if>
+                                          </c:when>
+                                          <c:otherwise>
+                                              <% count=count+1; %>
+                                          </c:otherwise>
+                                      </c:choose>
+                                  </c:otherwise>
+                             </c:choose>
+                         </c:forEach>  --%>  
+                                       	
                     </td>
                 </tr>
             </c:forEach>
-        </table>
-    </div>	
-</body>
+		             
+		             
+				</tbody>
+			</table>
+			<grammarly>
+				<div class="_e725ae-textarea_btn _e725ae-not_focused">
+					<div class="_e725ae-transform_wrap">
+						<div class="_e725ae-status">
+						</div>
+					</div>
+				</div>
+			</grammarly>
+		</div>
+	</div>
+</div>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/scripts.js"></script>
+  </body>
 </html>
+
+
+

@@ -1,12 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-<head>
-	<title>Admin Home Page</title>
-</head>
-<body>
-<%
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Home :: Atmecs TechTonics</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/style.css" rel="stylesheet" />
+
+  </head>
+  <body>
+  
+      <%
 response.setHeader("Cache-Control","no-cache");
 response.setHeader("Cache-Control","no-store");
 response.setHeader("Pragma","no-cache");
@@ -28,29 +41,86 @@ for(Cookie cookie : cookies){
     sessionID = session.getId();
 }
 %>
-<h3>Hi <%=userName %>,</h3>
-<form action="<%=response.encodeURL("LogoutServlet") %>" method="post">
-<input type="submit" value="Logout" >
-</form>
-	<center>
-		<h1>Admin Dashboard</h1>
-        <h2>
-        	<a href="anew">Add TechTalk</a>
-        	&nbsp;&nbsp;&nbsp;
-        	<a href="alist">List All TechTalks</a>
-        	
-        </h2>
-	</center>
-    <div align="center">
-		<c:if test="${techTalk != null}">
-			<form action="aupdate" method="post">
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="page-header">
+				<h1>
+					Atmecs TechTonics <small>Admin Dashboard</small>
+				</h1>
+				<grammarly>
+					<div class="_e725ae-textarea_btn _e725ae-not_focused">
+						<div class="_e725ae-transform_wrap">
+							<div class="_e725ae-status">
+							</div>
+						</div>
+					</div>
+				</grammarly>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+					<div class="row">
+						<div class="col-md-6">
+						</div>
+						<div class="col-md-6">
+							<div class="btn-group">
+								 
+								 <form action="<%=response.encodeURL("LogoutServlet") %>" method="post">
+							<button type="submit" class="btn btn-danger">
+				                 Logout
+			               </button>
+			                 </form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="nav nav-pills">
+				<li >
+					 <a href="alist">Home</a>
+				</li>
+				<li class="active">
+					 <a href="anew"> Add TechTalks</a>
+				</li>
+				<li>
+					 <a href="arequest"> Requested TechTalks <c:if test="${count!=0}"> <span class="badge pull-right"><c:out value="${count}"/> New</span></c:if> </a>
+				</li>
+			</ul>
+			<grammarly>
+				<div class="_e725ae-textarea_btn _e725ae-not_focused">
+					<div class="_e725ae-transform_wrap">
+						<div class="_e725ae-status">
+						</div>
+					</div>
+				</div>
+			</grammarly>
+			<div class="row">
+		<div class="col-md-4">
+			<div class="row">
+				<div class="col-md-6">
+				</div>
+				<div class="col-md-6">
+				<c:if test="${techTalk != null}">
+			<form action="aupdate" method="post" class="form-horizontal" role="form">
         </c:if>
         <c:if test="${techTalk == null}">
-			<form action="ainsert" method="post">
+			<form action="ainsert" method="post" class="form-horizontal" role="form">
         </c:if>
-        <table border="1" cellpadding="5">
-            <caption>
-            	<h2>
+					
+						<div class="form-group">
+						 <caption>
+            	      <h2>
             		<c:if test="${techTalk != null}">
             			Edit TechTalk
             		</c:if>
@@ -59,49 +129,80 @@ for(Cookie cookie : cookies){
             		</c:if>
             	</h2>
             </caption>
-        		<c:if test="${techTalk != null}">
+                         <c:if test="${techTalk != null}">
         			<input type="hidden" name="id" value="<c:out value='${techTalk.id}' />" />
-        		</c:if>      
-        		  <tr>
-                <th>Date: </th>
-                <td>
-                	<input type="text" name="date" size="45"
-                			value="<c:out value='${techTalk.date}' />"
-                		/>
-                </td>
-            </tr>
-            <tr>      
-            <tr>
-                <th>Title: </th>
-                <td>
-                	<input type="text" name="title" size="45"
-                			value="<c:out value='${techTalk.title}' />"
-                		/>
-                </td>
-            </tr>
-            <tr>
-                <th>Description: </th>
-                <td>
-                	<input type="text" name="description" size="45"
-                			value="<c:out value='${techTalk.description}' />"
-                	/>
-                </td>
-            </tr>
-            <tr>
-                <th>Presenter: </th>
-                <td>
-                	<input type="text" name="presenter" size="45"
-                			value="<c:out value='${techTalk.presenter}' />"
-                	/>
-                </td>
-            </tr>
-            <tr>
-            	<td colspan="2" align="center">
-            		<input type="submit" value="Save" />
-            	</td>
-            </tr>
-        </table>
-        </form>
-    </div>	
-</body>
+        		</c:if>  
+							 
+							<label for="inputEmail3" class="col-sm-2 control-label">
+								Date
+							</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="inputEmail3" name="date" value="<c:out value='${techTalk.date}' />" />
+							</div>
+						</div>
+						
+						<div class="form-group">
+							 
+							<label for="inputEmail3" class="col-sm-2 control-label">
+								Title
+							</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="inputEmail3" name="title" value="<c:out value='${techTalk.title}' />"/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							 
+							<label for="inputEmail3" class="col-sm-2 control-label">
+								Description
+							</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="inputEmail3" name="description" value="<c:out value='${techTalk.description}' />"/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							 
+							<label for="inputEmail3" class="col-sm-2 control-label">
+								Presentor
+							</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="inputEmail3" name="presenter"  value="<c:out value='${techTalk.presenter}' />"/>
+							</div>
+						</div>
+						
+						
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								 
+								<button type="submit" class="btn btn-default">
+									Save
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+			<grammarly>
+				<div class="_e725ae-textarea_btn _e725ae-not_focused">
+					<div class="_e725ae-transform_wrap">
+						<div class="_e725ae-status">
+						</div>
+					</div>
+				</div>
+			</grammarly>
+		</div>
+	</div>
+</div>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/scripts.js"></script>
+  </body>
 </html>
